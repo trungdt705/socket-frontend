@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta charset="utf-8">
+	<title>Upload video</title>
+
+</head>
+<body>
+<header>
+		<!-- modal login -->
+		<div id="login" class="modal">
+			<div class="modal-content">
+				<h4 class="center-align">ĐĂNG NHẬP</h4>
+				<form>
+					<input type="text" name="username" placeholder="Tài khoản">
+					<input type="password" name="password" placeholder="Mật khẩu">
+				</form>
+				<div class="center-align">
+					<a class="modal-action waves-effect waves-green btn" id="btnLogin">Đăng nhập</a>
+					<a href="#!" class="modal-action modal-close waves-effect waves-red btn red accent-4" id="btnClose">Thoát</a>	
+				</div>
+						
+			</div>
+		</div>
+		<!-- modal login -->
+		<!-- dropdown desktop -->
+		<ul id="music" class="dropdown-content">
+			<li><a href="playlist.html?page=1&maxResult=3" class="list-playlist">Playlist cá nhân</a></li>
+			<li><a href="manage-video.html">Quản lý nhạc</a></li>
+		</ul>
+		<!-- dropdown desktop -->
+		<!-- dropdown mobile -->
+		<ul id="music1" class="dropdown-content">
+			<li><a href="playlist.html?page=1&maxResult=3" class="list-playlist">Playlist cá nhân</a></li>
+			<li><a href="manage-video.html">Quản lý nhạc</a></li>
+		</ul>
+		<!-- dropdown mobile -->
+		<nav class=" blue lighten-1">
+			<div class="nav-wrapper">
+				<a href="index.html" class="brand-logo">VIDEO</a>
+				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+				<ul class="right hide-on-med-and-down">
+					<li><a href="about.html">About<i class="material-icons right"></i></a></li>
+					<li><a class="upload-page"><i class="material-icons left">file_upload</i>Upload</a></li>
+					<li><a class="dropdown-button" href="#!" data-activates="music">Nhạc cá nhân<i class="material-icons right">arrow_drop_down</i></a></li>
+					<!-- info -->
+					<li class='btn-login'><a class="waves-effect waves-light btn modal-trigger red accent-4" href="#login">Đăng nhập</a></li>
+					<li class='btn-register'><a href="register.html">Đăng kí</a></li>
+					<li style="display: none;" class='btn-info'><a class="waves-effect waves-light btn red accent-4" id="btn-info"></a></li>
+					<li style="display: none;" class='btn-logout'><a class='btn-logout' id="btn-logout">Đăng xuất</a></li>
+					<!-- info -->
+				</ul>
+				<ul class="side-nav" id="mobile-demo">
+					<li><a href="about.html">About<i class="material-icons right"></i></a></li>
+					<li><a class="upload-page"><i class="material-icons left">file_upload</i>Upload</a></li>
+					<li><a class="dropdown-button" href="#!" data-activates="music1">Nhạc cá nhân<i class="material-icons right">arrow_drop_down</i></a></li>
+					<li><a href="#!">About<i class="material-icons right"></i></a></li>
+					<li class='btn-login'><a class="waves-effect waves-light btn modal-trigger red accent-4" href="#login">Đăng nhập</a></li>
+					<li class='btn-register'><a href="register.html">Đăng kí</a></li>
+					<li style="display: none;" class='btn-info'><a class="waves-effect waves-light btn btn-info red accent-4" id="btn-info-mobile"></a></li>
+					<li style="display: none;" class='btn-logout'><a class='btn-logout' id="btn-logout-mobile">Đăng xuất</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<main class="container">
+		<div class="row">
+			<div class="col xl8 offset-xl4">
+				<h4>TẢI LÊN BÀI HÁT</h4>
+			</div>	
+		</div>
+		<div class="row">
+			<form class="col s12">
+				<div class="input-field col xl6 s12">
+					<i class="material-icons prefix">music_video</i>
+					<input id="name-clip" type="text" name="name">
+					<label for="name-clip">Tên clip</label>
+				</div>
+				<div class="input-field col s12">
+					<i class="material-icons prefix">description</i>
+					<textarea id="description" class="materialize-textarea" name="description"></textarea>
+					<label for="description">Mô tả</label>
+				</div>
+				<div class="input-field col s12">
+					<i class="material-icons prefix">insert_photo</i>
+					<input id="thumbnail" type="text" name="thumbnail">
+					<label for="thumbnail">Ảnh đại diện video</label>
+				</div>
+				<div class="input-field col s12">
+					<i class="material-icons prefix">vpn_key</i>
+					<input id="keywords" type="text" name="keywords">
+					<label for="keywords">Từ khóa</label>
+				</div>
+				<div class="input-field col s12">
+					<i class="material-icons prefix">wb_cloudy</i>
+					<input id="url" type="text" name="url">
+					<label for="url">Url video</label>
+				</div>
+			</form>
+		</div>
+		<!-- form upload -->
+		<form action="#" enctype="multipart/form-data" id="uploadfile">
+			<div class="file-field input-field">
+				<div class="btn">
+					<span>File</span>
+					<input type="file" name="file">
+				</div>
+				<div class="file-path-wrapper">
+					<input class="file-path" type="text" name="txtfile" placeholder="Upload one file">
+				</div>
+				<input class="btn pink accent-3" type="submit" value="Upload File">
+				<span class="preloader-wrapper small active" id="loading" style="display: none;">
+					<div class="spinner-layer spinner-green-only">
+						<div class="circle-clipper left">
+							<div class="circle"></div>
+						</div><div class="gap-patch">
+							<div class="circle"></div>
+						</div><div class="circle-clipper right">
+							<div class="circle"></div>
+						</div>
+					</div>
+				</span>
+			</div>
+		</form>
+		<!-- form upload -->
+		<div class="row">
+			<div class="col xl8 offset-xl4">
+				<a class="waves-effect waves-light btn" id="uploadvideo"><i class="material-icons left">send</i>Tải lên</a>
+				<a class="waves-effect waves-light btn red accent-4"><i class="material-icons left">close</i>Làm lại</a>
+			</div>		
+		</div>
+	</main>
+<footer class="page-footer  blue lighten-1">
+	<div class="body">
+		<div class="row">
+			<div class="col l4 s12">
+				<h5 class="white-text">Dự án học tập và làm việc với API</h5>
+				<div class="grey-text text-lighten-4">Dự án sử dụng các công nghệ phổ biến và mạnh mẽ hiện này:</div>
+				<div class="grey-text text-lighten-4">Server được viết bằng NodeJS</div>
+				<div class="grey-text text-lighten-4">Database là Mongodb</div>
+				<div class="grey-text text-lighten-4">Client sử dụng HTML5, CSS3, Materialize, Jquery 3.2.1</div>
+			</div>
+			<div class="col l4 s12">
+				<h5 class="white-text">Tài liệu tham khảo</h5>
+				<ul>
+					<li><a class="grey-text text-lighten-3" href="https://github.com/">Github.com</a></li>
+					<li><a class="grey-text text-lighten-3" href="https://stackoverflow.com/">Stackoverflow.com</a></li>
+					<li><a class="grey-text text-lighten-3" href="https://cloud.google.com/">Google app engine</a></li>
+					<li><a class="grey-text text-lighten-3" href="http://materializecss.com/getting-started.html">Materializecss.com</a></li>
+				</ul>
+			</div>
+			<div class="col l4 s12">
+				<h5 class="white-text">Thông tin liên hệ</h5>
+				<ul>
+					<li>
+						<i class="material-icons">call</i>
+						<a class="grey-text text-lighten-3" href="#!">   Số điện thoại: 0977.570.592</a>
+					</li>
+					<li>
+						<i class="material-icons">contact_mail</i>
+						<a class="grey-text text-lighten-3" href="#!">Email: trungdtd00548@fpt.edu.vn</a>
+					</li>
+					<li>
+						<i class="material-icons">edit_location</i>
+						<a class="grey-text text-lighten-3" href="#!">Địa chỉ: Hà Đông, Hà Nội</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="footer-copyright">
+		<div class="container">
+			<div class="row">
+				<div class="col s10 offset-s2">
+					© 2018 Copyright: Thành Trung - FPT Aptech - T1708E &amp; Support by: Mr. Đào Xuân Hùng
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+	<script type="text/javascript" src="js/materialize.min.js"></script>
+	<script type="text/javascript">
+		$(".button-collapse").sideNav();
+		$('.carousel.carousel-slider').carousel({fullWidth: true});
+		$('.modal').modal();
+		$('select').material_select();
+		$('.datepicker').pickadate({
+		    selectMonths: true, // Creates a dropdown to control month
+		    selectYears: 15, // Creates a dropdown of 15 years to control year,
+		    today: 'Today',
+		    clear: 'Clear',
+		    close: 'Ok',
+		    closeOnSelect: false // Close upon selecting a date,
+		});
+	</script>
+	<script type="text/javascript" src="js/uploadfile.js"></script>
+</body>
+</html>

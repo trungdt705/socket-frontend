@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta charset="utf-8">
+<title>Quản lý video</title>
+
+</head>
+<body>
+	<header>
+		<!-- modal login -->
+		<div id="login" class="modal">
+			<div class="modal-content">
+				<h4 class="center-align">ĐĂNG NHẬP</h4>
+				<form>
+					<input type="text" name="username" placeholder="Tài khoản">
+					<input type="password" name="password" placeholder="Mật khẩu">
+				</form>
+				<div class="center-align">
+					<a class="modal-action waves-effect waves-green btn" id="btnLogin">Đăng nhập</a>
+					<a href="#!" class="modal-action modal-close waves-effect waves-red btn red accent-4" id="btnClose">Thoát</a>	
+				</div>
+						
+			</div>
+		</div>
+		<!-- modal login -->
+		<!-- dropdown desktop -->
+		<ul id="music" class="dropdown-content">
+			<li><a href="playlist.html?page=1&maxResult=3" class="list-playlist">Playlist cá nhân</a></li>
+			<li><a href="manage-video.html">Quản lý nhạc</a></li>
+		</ul>
+		<!-- dropdown desktop -->
+		<!-- dropdown mobile -->
+		<ul id="music1" class="dropdown-content">
+			<li><a href="playlist.html?page=1&maxResult=3" class="list-playlist">Playlist cá nhân</a></li>
+			<li><a href="manage-video.html">Quản lý nhạc</a></li>
+		</ul>
+		<!-- dropdown mobile -->
+		<nav class=" blue lighten-1">
+			<div class="nav-wrapper">
+				<a href="index.html" class="brand-logo">VIDEO</a>
+				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+				<ul class="right hide-on-med-and-down">
+					<li><a href="about.html">About<i class="material-icons right"></i></a></li>
+					<li><a class="upload-page"><i class="material-icons left">file_upload</i>Upload</a></li>
+					<li><a class="dropdown-button" href="#!" data-activates="music">Nhạc cá nhân<i class="material-icons right">arrow_drop_down</i></a></li>
+					<li><ul><a class="dropdown-button" data-activates="notification">Thông báo<span class="new badge red" data-badge-caption="tin mới" id='number-noti'></span></a></ul></li>
+					<ul id="notification" class="dropdown-content">
+					</ul>
+					<!-- info -->
+					<li class='btn-login'><a class="waves-effect waves-light btn modal-trigger red accent-4" href="#login">Đăng nhập</a></li>
+					<li class='btn-register'><a href="register.html">Đăng kí</a></li>
+					<li style="display: none;" class='btn-info'><a class="waves-effect waves-light btn red accent-4" id="btn-info"></a></li>
+					<li style="display: none;" class='btn-logout'><a class='btn-logout' id="btn-logout">Đăng xuất</a></li>
+					<!-- info -->
+				</ul>
+				<ul class="side-nav" id="mobile-demo">
+					<li><a href="about.html">About<i class="material-icons right"></i></a></li>
+					<li><a class="upload-page"><i class="material-icons left">file_upload</i>Upload</a></li>
+					<li><a class="dropdown-button" href="#!" data-activates="music1">Nhạc cá nhân<i class="material-icons right">arrow_drop_down</i></a></li>
+					<li><a href="#!">About<i class="material-icons right"></i></a></li>
+					<li class='btn-login'><a class="waves-effect waves-light btn modal-trigger red accent-4" href="#login">Đăng nhập</a></li>
+					<li class='btn-register'><a href="register.html">Đăng kí</a></li>
+					<li style="display: none;" class='btn-info'><a class="waves-effect waves-light btn btn-info red accent-4" id="btn-info-mobile"></a></li>
+					<li style="display: none;" class='btn-logout'><a class='btn-logout' id="btn-logout-mobile">Đăng xuất</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<!-- modal delete video -->
+	<div id="modal" class="modal">
+		<div class="modal-content">
+			<h4>Xóa video</h4>
+			<div class="input-field col s12">
+				<input id="hidden-videoid-delete" type="hidden" disabled place-holder="hidden-videoid">
+			</div>
+			<p>Bạn có muốn xóa video này không?</p>
+		</div>
+		<div class="modal-footer">
+			<a class="modal-action waves-effect waves-green btn" id="delete-video">Đồng ý</a>
+			<a class="modal-action modal-close waves-effect waves-green btn red accent-4">Không</a>
+		</div>
+	</div>
+	<!-- modal delete video -->
+	<main class="container">
+		<ul id="tabs-swipe-demo" class="tabs" style="margin-top: 10px;">
+			<li class="tab col s3"><a href="#uploaded-video" class="active">Uploaded video</a></li>
+			<li class="tab col s3"><a href="#favourited-video">Favourited video</a></li>
+		</ul>
+		<div id="uploaded-video" class="container-fluid">
+			<div class="row">
+				<div class="col xl3 l3 m3 s12">
+					<label>Từ ngày</label>
+					<input type="text" name="fromdate" class="datepicker">
+					<label>Đến ngày</label>
+					<input type="text" name="todate" class="datepicker">
+					<form>
+						<div class="input-field">
+							<input id="search" type="text">
+							<label for="search">Tìm kiếm</label>
+						</div>
+					</form>
+					<a class="waves-effect waves-light btn red accent-4" id="filter-video"><i class="material-icons left">filter_list</i>Lọc dữ liệu</a>	
+				</div>	
+				<div class="col offset-xl1 xl8 l8 m8 s12">
+					<div id="list-video-upload">
+						
+					</div>
+					<div>
+						<a class="waves-effect waves-light btn red accent-4" id="showmore"><i class="material-icons left">add</i>Xem thêm</a>
+						<a class="waves-effect waves-light btn red accent-4" id="showmore-filter" style="display: none;"><i class="material-icons left">add</i>Xem thêm</a>
+					</div>
+				</div>	
+			</div>
+		</div>
+	</div>
+	<div id="favourited-video" class="col xl12 s12"></div>
+</main>
+<footer class="page-footer blue lighten-1">
+		<div class="body">
+			<div class="row">
+				<div class="col l4 s12">
+					<h5 class="white-text">Dự án học tập và làm việc với API</h5>
+					<div class="grey-text text-lighten-4">Dự án sử dụng các công nghệ phổ biến và mạnh mẽ hiện này:</div>
+					<div class="grey-text text-lighten-4">Server được viết bằng NodeJS</div>
+					<div class="grey-text text-lighten-4">Database là Mongodb</div>
+					<div class="grey-text text-lighten-4">Client sử dụng HTML5, CSS3, Materialize, Jquery 3.2.1</div>
+				</div>
+				<div class="col l4 s12">
+					<h5 class="white-text">Tài liệu tham khảo</h5>
+					<ul>
+						<li><a class="grey-text text-lighten-3" href="https://github.com/">Github.com</a></li>
+						<li><a class="grey-text text-lighten-3" href="https://stackoverflow.com/">Stackoverflow.com</a></li>
+						<li><a class="grey-text text-lighten-3" href="https://cloud.google.com/">Google app engine</a></li>
+						<li><a class="grey-text text-lighten-3" href="http://materializecss.com/getting-started.html">Materializecss.com</a></li>
+					</ul>
+				</div>
+				<div class="col l4 s12">
+					<h5 class="white-text">Thông tin liên hệ</h5>
+					<ul>
+						<li>
+							<i class="material-icons">call</i>
+							<a class="grey-text text-lighten-3" href="#!">   Số điện thoại: 0977.570.592</a>
+						</li>
+						<li>
+							<i class="material-icons">contact_mail</i>
+							<a class="grey-text text-lighten-3" href="#!">Email: trungdtd00548@fpt.edu.vn</a>
+						</li>
+						<li>
+							<i class="material-icons">edit_location</i>
+							<a class="grey-text text-lighten-3" href="#!">Địa chỉ: Hà Đông, Hà Nội</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="footer-copyright">
+			<div class="container">
+				<div class="row">
+					<div class="col s10 offset-s2">
+						© 2018 Copyright: Thành Trung - FPT Aptech - T1708E &amp; Support by: Mr. Đào Xuân Hùng
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript">
+	$(".button-collapse").sideNav();
+	$('.carousel.carousel-slider').carousel({fullWidth: true});
+	$('select').material_select();
+	$('.modal').modal();
+	$('.datepicker').pickadate({
+		    selectMonths: true, // Creates a dropdown to control month
+		    selectYears: 15, // Creates a dropdown of 15 years to control year,
+		    today: 'Today',
+		    clear: 'Clear',
+		    close: '',
+		    closeOnSelect: true // Close upon selecting a date,
+		});
+	</script>
+	<script type="text/javascript" src="js/manage-video.js"></script>
+</body>
+</html>

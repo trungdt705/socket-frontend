@@ -1,0 +1,29 @@
+@media only screen and (min-width: 300px){
+	.modal{
+		width: 95%;
+	}
+
+	.body{
+		padding: 0 10px;
+	}
+}
+@media only screen and (min-width: 768px) {
+	/* For tablets: */
+	.modal{
+		width: 50%;
+	}
+
+	.body{
+		padding: 0 10px;
+	}
+}
+@media only screen and (min-width: 992px) {
+	/* For desktop: */
+	.modal{
+		width: 25%;
+	}
+
+	.body{
+		padding: 0 30px;
+	}
+}

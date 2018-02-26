@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta charset="utf-8">
+	<style type="text/css">
+	.scroll-table {
+		overflow-x: auto;
+		white-space: nowrap;
+	}
+
+	tr td {
+		overflow: hidden;
+		max-width: 300px;
+		white-space:nowrap;	
+	}
+
+	@media only screen and (min-width: 300px){
+		.modal{
+			width: 80%;
+		}
+	}
+	@media only screen and (min-width: 768px) {
+		/* For tablets: */
+		.modal{
+			width: 50%;
+		}
+	}
+	@media only screen and (min-width: 992px) {
+		/* For desktop: */
+		.modal{
+			width: 35%;
+		}
+	}
+</style>
+<title></title>
+</head>
+<body>
+	<header>
+		<!-- modal login -->
+		<div id="login" class="modal modal-fixed-footer">
+			<div class="modal-content">
+				<h4>Đăng nhập tài khoản</h4>
+				<form>
+					<input type="text" name="username" placeholder="Tài khoản">
+					<input type="password" name="password" placeholder="Mật khẩu">
+				</form>		
+			</div>
+			<div class="modal-footer">
+				<a class="modal-action waves-effect waves-green btn" id="btnLogin">Đăng nhập</a>
+				<a href="#!" class="modal-action modal-close waves-effect waves-red btn red accent-4" id="btnClose">Thoát</a>
+			</div>
+		</div>
+		<!-- modal login -->
+		<!-- dropdown desktop -->
+		<div class="navbar-fixed">
+			<nav class="blue-grey darken-4">
+				<div class="nav-wrapper">
+					<a href="#" data-activates="slide-out" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
+					<a href="admin.html" class="brand-logo">ADMIN</a>
+				</div>
+			</nav>
+		</div>
+	</header>
+	<main class="container">
+		<!-- modal delete video -->
+		<div id="modal" class="modal">
+			<div class="modal-content">
+				<h4>Xóa video</h4>
+				<div class="input-field col s12">
+					<input id="hidden-videoid-delete" type="hidden" disabled place-holder="hidden-videoid">
+				</div>
+				<p>Bạn có muốn xóa video này không?</p>
+			</div>
+			<div class="modal-footer">
+				<a class="modal-action waves-effect waves-green btn" id="delete-video">Đồng ý</a>
+				<a class="modal-action modal-close waves-effect waves-green btn red">Không</a>
+			</div>
+		</div>
+		<!-- modal delete video -->
+		<!-- Sửa video modal -->
+		<div id="modaledit" class="modal">
+			<div class="modal-content">
+				<h4>Sửa video</h4>
+				<div id="edit-video" class="col s12">
+					<div class="row">
+						<form class="col xl12">
+							<div class="row">
+								<div class="col xl12 s12">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">account_circle</i>
+										<input id="edit-videoid" type="text" place-holder="Video Id" disabled>
+										<label for="edit-videoid">Video ID</label>
+									</div>
+									<div class="input-field col s12">
+										<i class="material-icons prefix">lock</i>
+										<input id="edit-name" type="text" place-holder="Tên video">
+										<label for="edit-name">Tên video</label>
+									</div>
+									<div class="input-field col s12">
+										<i class="material-icons prefix">lock</i>
+										<input id="edit-description" type="text" place-holder="Mô tả">
+										<label for="edit-description">Mô tả</label>
+									</div>
+									<div class="input-field col s12">
+										<i class="material-icons prefix">email</i>
+										<input id="edit-keywords" type="text" place-holder="Từ khóa">
+										<label for="edit-keywords">Từ khóa</label>
+									</div>
+									<div class="input-field col s12">
+										<i class="material-icons prefix">insert_photo</i>
+										<input id="edit-thumbnail" type="text" place-holder="Ảnh đại diện">
+										<label for="edit-thumbnail">Ảnh đại diện</label>
+									</div>
+									<div class="input-field col s12">
+										<i class="material-icons prefix">insert_photo</i>
+										<input id="edit-url" type="text" disabled place-holder="Đường dân video" >
+										<label for="edit-url">Url Video</label>
+									</div>
+									<div class="input-field col s12">
+										<input id="hidden-videoid" type="hidden" disabled place-holder="hidden-videoid">
+									</div>
+								</div>
+							</div>
+						</form>	
+						<div class="row">
+							<div class="col xl8 offset-xl4">
+								<a class="waves-effect waves-light btn" id="btn-edit-video"><i class="material-icons left">send</i>Sửa video</a>
+							</div>		
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Sửa video modal -->
+		<!-- modal delete video -->
+		<!-- side navbar -->
+		<ul id="slide-out" class="side-nav">
+			<li>
+				<div class="user-view">
+					<div class="background">
+						<img src="https://static.pexels.com/photos/248797/pexels-photo-248797.jpeg">
+					</div>
+					<a style="cursor: pointer;"><img class="circle" src="https://static.pexels.com/photos/248797/pexels-photo-248797.jpeg"></a>
+					<a style="cursor: pointer;"><span class="white-text name btn-info btn-info" id="btn-info" style="display: none;"></span></a>
+					<a style="cursor: pointer;"><span class="white-text name btn-logout" id="btn-logout" style="display: none;">Đăng xuất</span></a>
+					<a style="cursor: pointer;"><span class="white-text name modal-trigger btn-login" href="#login" >Đăng nhập</span></a>
+				</div>
+			</li>
+			<li><a href="#!"><i class="material-icons">cloud</i>Quản lý trang web</a></li>
+			<li><a style="cursor: pointer;" id='add-video'>Thêm bài hát</a></li>
+			<li><div class="divider"></div></li>
+			<li><a style="cursor: pointer;" id="list-upload">Danh sách nhạc upload</a></li>
+			<li><div class="divider"></div></li>
+			<li><a style="cursor: pointer;" id="list-chat">Phản hồi khách hàng</a></li>
+		</ul>
+		<!-- side navbar -->
+		<article id='page-list-video'>
+			<div class="row">
+				<div class="col xl12">
+					<div class="input-field col xl4 s12">
+						<i class="material-icons prefix">perm_contact_calendar</i>
+						<input id="fromdate" type="text" class="datepicker">
+						<label for="fromdate">Từ ngày</label>
+					</div>
+					<div class="input-field col xl4 s12">
+						<i class="material-icons prefix">perm_contact_calendar</i>
+						<input id="todate" type="text" class="datepicker">
+						<label for="todate">Đến ngày</label>
+					</div>
+					<div class="input-field col xl4 s12">
+						<i class="material-icons prefix">search</i>
+						<input id="search" type="text">
+						<label for="search">Tìm kiếm</label>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col xl12">
+					<div class="input-field col xl2 s4">
+						<i class="material-icons prefix">list</i>
+						<select id="record">
+							<option value="" disabled>Số bản ghi</option>
+							<option value="5" selected>5</option>
+							<option value="10">10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+							<option value="30">30</option>
+							<option value="40">40</option>
+							<option value="50">50</option>
+						</select>
+					</div>
+					<div class="col xl2 s4">
+						<div class="input-field">
+							<select id="status">
+								<option value="" disabled>Tình trạng</option>
+								<option value="1" selected>Chưa kiểm duyệt</option>
+								<option value="2">Đã kiểm duyệt</option>
+							</select>
+							<label>Tình trạng</label>
+						</div>
+					</div>		
+				</div>
+				<div class="row">
+					<div class="col xl12">
+						<a class="waves-effect waves-light btn" id="filter"><i class="material-icons left">cloud</i>Lọc dữ liệu</a>
+					</div>					
+				</div>				
+			</div>
+			<div class="col xl12 scroll-table">
+				<table class="highlight bordered">
+					<tr>
+						<th><div>STT</div></th>
+						<th>Video ID</th>
+						<th>Tên video</th>
+						<th><div>Mô tả</div></th>
+						<th>Thumbnail</th>
+						<th>Ngày tạo</th>
+						<th>Tình trạng</th>
+						<th>Duyệt</th>
+						<th>Sửa</th>
+						<th>Xóa</th>
+					</tr>
+					<tbody id="list-video">		
+					</tbody>
+				</table>
+			</div>
+			<ul class="pagination">
+			</ul>
+		</article>
+		<article style="display: none;" id='upload-video'>
+			<div class="row">
+				<div class="col xl8 offset-xl4">
+					<h4>TẢI LÊN BÀI HÁT</h4>
+				</div>	
+			</div>
+			<div class="row">
+				<form class="col s12">
+					<div class="input-field col s12">
+						<i class="material-icons prefix">music_video</i>
+						<input id="name-clip" type="text" name="name">
+						<label for="name-clip">Tên clip</label>
+					</div>
+					<div class="input-field col s12">
+						<i class="material-icons prefix">description</i>
+						<input id="password" type="text" name="description">
+						<label for="password">Mô tả</label>
+					</div>
+					<div class="input-field col s12">
+						<i class="material-icons prefix">insert_photo</i>
+						<input id="email" type="text" name="thumbnail">
+						<label for="email">Ảnh đại diện video</label>
+					</div>
+					<div class="input-field col s12">
+						<i class="material-icons prefix">vpn_key</i>
+						<input id="email" type="text" name="keywords">
+						<label for="email">Từ khóa</label>
+					</div>
+					<div class="input-field col s12">
+						<i class="material-icons prefix">wb_cloudy</i>
+						<input id="email" type="text" name="url">
+						<label for="email">Url video</label>
+					</div>
+				</form>
+			</div>
+			<!-- form upload -->
+			<div class="row">
+				<form action="#" enctype="multipart/form-data" id="uploadfile">
+					<div class="file-field input-field">
+						<div class="btn">
+							<span>File</span>
+							<input type="file" name="file">
+						</div>
+						<div class="file-path-wrapper">
+							<input class="file-path" type="text" name="txtfile" placeholder="Upload one file">
+						</div>
+						<input class="btn pink accent-3" type="submit" value="Upload File">
+						<span class="preloader-wrapper small active" id="loading" style="display: none;">
+							<div class="spinner-layer spinner-green-only">
+								<div class="circle-clipper left">
+									<div class="circle"></div>
+								</div><div class="gap-patch">
+									<div class="circle"></div>
+								</div><div class="circle-clipper right">
+									<div class="circle"></div>
+								</div>
+							</div>
+						</span>
+					</div>
+				</form>
+				<!-- form upload -->
+			</div>
+			<div class="row">
+				<div class="col xl8 offset-xl4 s12">
+					<a class="waves-effect waves-light btn" id="uploadvideo"><i class="material-icons left">send</i>Tải lên</a>
+					<a class="waves-effect waves-light btn red"><i class="material-icons left">close</i>Làm lại</a>
+				</div>		
+			</div>
+		</article>
+		<article id="page-register" style="display: none;">
+			<div class="row">
+				<div class="col xl8 offset-xl4">
+					<h4>ĐĂNG KÍ TÀI KHOẢN</h4>
+				</div>	
+			</div>	
+			<div class="row">
+				<form class="col s12">
+					<div class="row">
+						<div class="col xl6 s12">
+							<div class="input-field col s12">
+								<i class="material-icons prefix">account_circle</i>
+								<input id="icon_prefix" type="text" name="username-register">
+								<label for="icon_prefix">Tên tài khoản</label>
+							</div>
+							<div class="input-field col s12">
+								<i class="material-icons prefix">lock</i>
+								<input id="icon_telephone" type="tel" name="password-register">
+								<label for="icon_telephone">Mật khẩu</label>
+							</div>
+							<div class="input-field col s12">
+								<i class="material-icons prefix">lock</i>
+								<input id="icon_telephone" type="tel" name="repassword">
+								<label for="icon_telephone">Nhập lại mật khẩu</label>
+							</div>
+							<div class="input-field col s12">
+								<i class="material-icons prefix">email</i>
+								<input id="icon_telephone" type="text" name="email">
+								<label for="icon_telephone">Email</label>
+							</div>
+						</div>
+						<div class="col xl6 s12">
+							<div class="input-field col s12">
+								<i class="material-icons prefix">insert_photo</i>
+								<input id="fullname" type="text" name="fullname">
+								<label for="fullname">Tên đầy đủ</label>
+							</div>
+							<div class="input-field col s12">
+								<i class="material-icons prefix">perm_contact_calendar</i>
+								<input type="text" name="birthday" class="datepicker">
+								<label for="icon_telephone">Ngày sinh</label>
+							</div>
+							<div class="input-field col s12">
+								<i class="material-icons prefix">insert_photo</i>
+								<input id="icon_telephone" type="tel" name="avatar">
+								<label for="icon_telephone">Ảnh đại diện</label>
+							</div>
+							<div class="input-field col s12">
+								<i class="material-icons prefix">person</i>
+								<select id="gender">
+									<option value="" disabled selected>Lựa chọn giới tính</option>
+									<option value="1">Nam</option>
+									<option value="0">Nữ</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="row">
+				<div class="col xl12 offset-xl1">
+					<input type="checkbox" class="filled-in" id="policy"/>
+					<label for="policy">Đồng ý với các điều khoản sử dụng</label>
+				</div>
+			</div>	
+			<div class="row">
+				<div class="col xl6 offset-xl4">
+					<a class="waves-effect waves-light btn-large" id="register"><i class="material-icons left">send</i>Đăng kí</a>
+					<a class="waves-effect waves-light btn-large red"><i class="material-icons left">close</i>Thoát</a>
+				</div>		
+			</div>
+		</article>
+		<article id="chat-box" style="display: none;" >
+			<h3 class="blue accent-2 z-depth-2 center-align">Ghi nhận ý kiến phản hồi của khách hàng</h3>
+			<div class="row z-depth-4">
+				<div class="col xl4 l4 m6 s12">
+					<h5>Danh sách phản hồi</h5>
+					<div class="collection" id="list-user-chat">
+						
+					</div>
+				</div>
+				<div class="col xl8 l8 m6 s12" style="display: none;" id="conversation">
+					<div class="row">
+						<div class="col xl3 s12">
+							<span id="user-chat" class="purple lighten-2 z-depth-2"></span>
+						</div>
+					</div>	
+					<div style="height: 400px; overflow-y: scroll; overflow-x: hidden;" class="z-depth-1" id="box-support">
+<!-- 						<div id="content-chat">
+							
+						</div> -->		
+					</div>
+					<div class="divider"></div>
+					<div class="row" style="margin-top: 20px;">
+						<div class="col s9">
+							<input id="support-chat" type="text" placeholder="Gõ nội dung chat">
+						</div>
+						<div class="col s2">
+							<a class="btn-floating btn waves-effect waves-light red"><i class="material-icons">mode_edit</i></a>
+						</div>
+					</div>	
+				</div>	
+			</div>
+		</article>
+	</main>
+
+<footer class="page-footer blue-grey darken-4">
+	<div class="container">
+		<div class="row">
+			<div class="col l4 s12">
+				<h5 class="white-text">Dự án học tập và làm việc với API</h5>
+				<div class="grey-text text-lighten-4">Dự án sử dụng các công nghệ phổ biến và mạnh mẽ hiện này:</div>
+				<div class="grey-text text-lighten-4">Server được viết bằng NodeJS</div>
+				<div class="grey-text text-lighten-4">Database là Mongodb</div>
+				<div class="grey-text text-lighten-4">Client sử dụng HTML5, CSS3, Materialize, Jquery 3.2.1</div>
+			</div>
+			<div class="col l4 s12">
+				<h5 class="white-text">Tài liệu tham khảo</h5>
+				<ul>
+					<li><a class="grey-text text-lighten-3" href="https://github.com/">Github.com</a></li>
+					<li><a class="grey-text text-lighten-3" href="https://stackoverflow.com/">Stackoverflow.com</a></li>
+					<li><a class="grey-text text-lighten-3" href="https://cloud.google.com/">Google app engine</a></li>
+					<li><a class="grey-text text-lighten-3" href="http://materializecss.com/getting-started.html">Materializecss.com</a></li>
+				</ul>
+			</div>
+			<div class="col l4 s12">
+				<h5 class="white-text">Thông tin liên hệ</h5>
+				<ul>
+					<li>
+						<i class="material-icons">call</i>
+						<a class="grey-text text-lighten-3" href="#!">   Số điện thoại: 0977.570.592</a>
+					</li>
+					<li>
+						<i class="material-icons">contact_mail</i>
+						<a class="grey-text text-lighten-3" href="#!">Email: trungdtd00548@fpt.edu.vn</a>
+					</li>
+					<li>
+						<i class="material-icons">edit_location</i>
+						<a class="grey-text text-lighten-3" href="#!">Địa chỉ: Hà Đông, Hà Nội</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="footer-copyright">
+		<div class="container">
+			<div class="row">
+				<div class="col s10 offset-s2">
+					© 2018 Copyright: Thành Trung - FPT Aptech - T1708E &amp; Support by: Mr. Đào Xuân Hùng
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/socket.io.js"></script>
+	<script type="text/javascript" src="js/materialize.min.js"></script>
+	<script type="text/javascript">
+		$(".button-collapse").sideNav();
+		$('.carousel.carousel-slider').carousel({fullWidth: true});
+		$('select').material_select();
+		$('.modal').modal();
+		$(".button-collapse").sideNav();
+		$('.datepicker').pickadate({
+		    selectMonths: true, // Creates a dropdown to control month
+		    selectYears: 15, // Creates a dropdown of 15 years to control year,
+		    today: 'Today',
+		    clear: 'Clear',
+		    close: '',
+		    closeOnSelect: true // Close upon selecting a date,
+		});
+	</script>
+	<script type="text/javascript" src="js/admin.js"></script>
+</body>
+</html>
